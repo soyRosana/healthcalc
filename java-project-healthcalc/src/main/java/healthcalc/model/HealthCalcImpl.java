@@ -6,6 +6,10 @@ public class HealthCalcImpl implements HealthCalc {
     // atributo estático que guarde la instancia única
     private static HealthCalcImpl instance;
 
+    // constructor privado para evitar instanciación externa
+    private HealthCalcImpl() {
+    }
+
     @Override
     public String bmiClassification(double bmi) throws InvalidHealthDataException {
         if (bmi < 0) {
