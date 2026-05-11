@@ -3,6 +3,8 @@ package healthcalc.model;
 import healthcalc.exceptions.InvalidHealthDataException;
 
 public class HealthCalcImpl implements HealthCalc {
+    // atributo estático que guarde la instancia única
+    private static HealthCalcImpl instance;
 
     @Override
     public String bmiClassification(double bmi) throws InvalidHealthDataException {
