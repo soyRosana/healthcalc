@@ -6,7 +6,7 @@ import healthcalc.model.HealthCalc;
 import healthcalc.model.HealthCalcImpl;
 public class Main {
     public static void main(String[] args) {
-        HealthCalc calc = new HealthCalcImpl();
+        HealthCalc calc = HealthCalcImpl.getInstance();
         Scanner sc = new Scanner(System.in);
         try {
             System.out.print("Enter weight (kg): ");
