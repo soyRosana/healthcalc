@@ -417,3 +417,29 @@ En esta sección se detallan las historias de usuario y los escenarios de prueba
 ![Captura de la interfaz (4)](doc/GUI/4.PanelWC.png)
 </details> 
 
+--
+## Patrones de Diseño
+<details>
+<summary><b>Patrón Singular (Singleton)</b></summary>
+Se ha aplicado el patrón Singleton a la clase 'HealthCalcImpl'. Esto garantiza que solo exista una única instancia de la calculadora en toda la aplicación, centralizando la lógica y optimizando el uso de recursos.
+
+![Captura del patrón (1)](design_patterns/PatronSingularUML.png)
+
+</details> 
+<details>
+<summary><b>Patrón ...</b></summary>
+
+![Captura del patrón (2)](design_patterns/)
+</details> 
+
+<details>
+<summary><b>Patrón ...</b></summary>
+
+![Captura del patrón (3)](design_patterns/)
+</details> 
+
+<details>
+<summary><b>Patrón ...</b></summary>
+
+![Captura del patrón (4)](design_patterns/)
+</details> 
