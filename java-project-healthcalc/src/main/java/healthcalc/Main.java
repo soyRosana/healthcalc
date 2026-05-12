@@ -1,6 +1,7 @@
 package healthcalc;
 
 import java.util.Scanner;
+
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.model.HealthCalc;
 import healthcalc.model.HealthCalcImpl;
@@ -23,6 +24,24 @@ public class Main {
             double waist = sc.nextDouble();
             String wcRisk = calc.wcClassification(waist, gender);
             System.out.println("Your Cardiovascular Risk is: " + wcRisk);
+
+            // apartado 3.a
+        
+            System.out.println("PRUEBA DEL PATRÓN ADAPTER (HOSPITAL)");
+            
+            HealthHospital hospital = new HealthHospitalAdapter();
+            
+            // Datos fijos para comprobar que funciona (Modo Cliente)
+            float alturaHospital = 1.70f; // Metros
+            int pesoHospital = 72500;     // Gramos
+
+            float[] resHospital = hospital.indiceMasaCorporal(alturaHospital, pesoHospital);
+            int pesoIdealHospital = hospital.pesoCorporalIdeal('M', alturaHospital); // Usamos 'M' por ejemplo
+
+            System.out.println("Datos enviados por Hospital: " + alturaHospital + "m, " + pesoHospital + "g");
+            System.out.println("Resultado IMC Adaptado: " + resHospital[0]);
+            System.out.println("Peso Ideal Adaptado: " + pesoIdealHospital + " kg");
+
         } catch (InvalidHealthDataException e) {
             System.out.println("Error: " + e.getMessage());
         }
