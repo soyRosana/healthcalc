@@ -7,7 +7,7 @@ public class HealthCalcImpl implements HealthCalc {
     private static HealthCalcImpl instance;
 
     // constructor privado para evitar instanciación externa
-    private HealthCalcImpl() {
+    public HealthCalcImpl() {
     }
 
     // método público para obtener la instancia única

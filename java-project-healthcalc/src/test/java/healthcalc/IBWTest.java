@@ -26,7 +26,7 @@ public class IBWTest {
 
     @BeforeEach
     void setUp() {
-        healthCalc = new HealthCalcImpl();
+        healthCalc =  HealthCalcImpl.getInstance();
     }
 
     @Nested

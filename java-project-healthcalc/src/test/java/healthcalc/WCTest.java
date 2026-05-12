@@ -27,7 +27,7 @@ public class WCTest {
 
     @BeforeEach
     void setUp() {
-        healthCalc = new HealthCalcImpl();
+        healthCalc = HealthCalcImpl.getInstance();
     }
 
     @Nested
