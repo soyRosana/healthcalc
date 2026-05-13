@@ -12,16 +12,14 @@ public class HealthStatsProxy implements HealthCalc, HealthStats {
     private List<DatosPaciente> listaPacientes;
 
     public HealthStatsProxy() {
-        // Usamos el Singleton
         this.calculadora = HealthCalcImpl.getInstance();
         this.listaPacientes = new ArrayList<>();
     }
 
-
     @Override
     public double bmi(double weight, double height) throws InvalidHealthDataException {
         double resultado = calculadora.bmi(weight, height);
-        listaPacientes.add(new DatosPaciente((float)weight, (float)height, ' ', (float)resultado));
+        listaPacientes.add(new DatosPaciente((float)weight, (float)height, 'U', (float)resultado));
         return resultado;
     }
 
@@ -33,6 +31,7 @@ public class HealthStatsProxy implements HealthCalc, HealthStats {
     @Override
     public double idealBodyWeight(double height, char gender) throws InvalidHealthDataException {
         double result = calculadora.idealBodyWeight(height, gender);
+        listaPacientes.add(new DatosPaciente(0f, (float)height, gender, 0f));
         return result;
     }
 
@@ -41,35 +40,46 @@ public class HealthStatsProxy implements HealthCalc, HealthStats {
         return calculadora.wcClassification(waistCircumference, gender);
     }
 
-
     @Override
     public float alturaMedia() {
         if (listaPacientes.isEmpty()) return 0;
         float suma = 0;
+        int cont = 0;
         for (DatosPaciente p : listaPacientes) {
-            suma += p.getAltura();
+            if (p.getAltura() > 0) {
+                suma += p.getAltura();
+                cont++;
+            }
         }
-        return suma / listaPacientes.size();
+        return cont == 0 ? 0 : suma / cont;
     }
 
     @Override
     public float pesoMedio() {
         if (listaPacientes.isEmpty()) return 0;
         float suma = 0;
+        int cont = 0;
         for (DatosPaciente p : listaPacientes) {
-            suma += p.getPeso();
+            if (p.getPeso() > 0) {
+                suma += p.getPeso();
+                cont++;
+            }
         }
-        return suma / listaPacientes.size();
+        return cont == 0 ? 0 : suma / cont;
     }
 
     @Override
     public float imcMedio() {
         if (listaPacientes.isEmpty()) return 0;
         float suma = 0;
+        int cont = 0;
         for (DatosPaciente p : listaPacientes) {
-            suma += p.getImc();
+            if (p.getImc() > 0) {
+                suma += p.getImc();
+                cont++;
+            }
         }
-        return suma / listaPacientes.size();
+        return cont == 0 ? 0 : suma / cont;
     }
 
     @Override
