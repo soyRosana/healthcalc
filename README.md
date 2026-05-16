@@ -437,7 +437,7 @@ Se ha implementado el patrón Adapter para permitir la integración de nuestra c
 * **Funcionalidad:** El adaptador traduce las unidades de medida del hospital (metros y gramos) a las unidades internas de la calculadora (centímetros y kilogramos).
 * **Interoperabilidad:** Permite que la calculadora sea utilizada por sistemas externos con interfaces diferentes sin modificar el código original.
 
-![Captura del patrón (2)](design_patterns/3a(2).png)
+![Captura del patrón (2)](design_patterns/3a_adapter.png)
 
 </details>
 
@@ -450,6 +450,6 @@ Se ha implementado un Proxy para interceptar las llamadas a la calculadora y gen
 * **Estadísticas:** A través de la interfaz `HealthStats`, permite obtener medias de los valores y conteos por género.
 * **Ventaja:** Añade funcionalidades de registro y análisis sin alterar el código base de la calculadora original.
 
-![Captura del patrón (3)](design_patterns/3b.png)
+![Captura del patrón (3)](design_patterns/3b_proxy.png)
 
 </details>
