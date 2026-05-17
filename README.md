@@ -453,3 +453,15 @@ Se ha implementado un Proxy para interceptar las llamadas a la calculadora y gen
 ![Captura del patrón (3)](design_patterns/3b_proxy.png)
 
 </details>
+<details>
+<summary><b>Patrón Decorador (Decorator) - Punto 3.c</b></summary>
+
+Se ha implementado el patrón Decorator para añadir soporte a diferentes sistemas métricos y generar mensajes personalizados en diferentes idiomas de forma dinámica.
+
+* **Funcionalidad (Zonas):** Adapta las entradas de la calculadora según la región, permitiendo utilizar el sistema americano (pies y libras) o el sistema métrico (metros y gramos).
+* **Funcionalidad (Idiomas):** Permite mprimir automáticamente por consola el resultado del cálculo del IMC en español e inglés.
+* **Ventaja:** Se pueden encadenar los decoradores, es decir, es posible crear múltiples combinaciones sin necesidad de modificar el código base del adaptador ni crear una jerarquía de clases compleja.
+
+![Captura del patrón (4)](design_patterns/3c_decorator.png)
+
+</details>
