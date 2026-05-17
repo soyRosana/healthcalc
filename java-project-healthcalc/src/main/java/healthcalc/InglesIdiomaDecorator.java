@@ -13,7 +13,7 @@ public class InglesIdiomaDecorator extends IdiomaBaseDecorator{
         String aStr = String.format("%.2f", a);
         String pStr = String.format("%.2f", pesoKg);
         String imcStr = String.format("%.2f", imc);
-        System.out.println("The person with height" + aStr + " metres and " + pStr + " Kg has a BMI of " + imcStr);
+        System.out.println("The person with height " + aStr + " metres and " + pStr + " Kg has a BMI of " + imcStr);
         
         return r;
     }
