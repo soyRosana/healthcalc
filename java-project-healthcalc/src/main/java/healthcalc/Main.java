@@ -10,6 +10,7 @@ public class Main {
         HealthCalc calc = HealthCalcImpl.getInstance();
         Scanner sc = new Scanner(System.in);
         try {
+            /* 
             System.out.print("Enter weight (kg): ");
             double p = sc.nextDouble();
             System.out.print("Enter height (cm): ");
@@ -24,8 +25,8 @@ public class Main {
             double waist = sc.nextDouble();
             String wcRisk = calc.wcClassification(waist, gender);
             System.out.println("Your Cardiovascular Risk is: " + wcRisk);
-
-            // apartado 3.a
+            */
+            // apartado 3.a (patrón adapter)
         
             System.out.println("PRUEBA DEL PATRÓN ADAPTER (HOSPITAL)");
             
@@ -42,7 +43,7 @@ public class Main {
             System.out.println("Resultado IMC Adaptado: " + resHospital[0]);
             System.out.println("Peso Ideal Adaptado: " + pesoIdealHospital + " kg");
 
-            //apartado 3b
+            //apartado 3b (patrón proxy)
 
             System.out.println("PRUEBA DEL PATRÓN PROXY (ESTADÍSTICAS)");
             
@@ -60,6 +61,24 @@ public class Main {
             System.out.println("- Peso medio: " + String.format("%.2f", proxy.pesoMedio()) + " kg");
             System.out.println("- Altura media: " + String.format("%.2f", proxy.alturaMedia()) + " cm");
             System.out.println("- IMC medio: " + String.format("%.2f", proxy.imcMedio()));
+
+            //apartado 3.c (patrón decorator)
+            HealthHospital h= new HealthHospitalAdapter();
+            // Versión europea + mensaje en español
+            HealthHospital euroEsp = new EspanolIdiomaDecorator(new EuropaZonaDecorator(h));
+            euroEsp.indiceMasaCorporal(1.6f, 85000);
+
+            // Versión europea + mensaje en inglés
+            HealthHospital euroEng = new InglesIdiomaDecorator(new EuropaZonaDecorator(h));
+            euroEng.indiceMasaCorporal(1.6f, 85000);
+
+            // Versión americana + mensaje en español
+            HealthHospital americaEsp = new EspanolIdiomaDecorator(new AmericaZonaDecorator(h));
+            americaEsp.indiceMasaCorporal(6.3f, 192);
+
+            // Versión americana + mensaje en inglés
+            HealthHospital americaEng = new InglesIdiomaDecorator(new AmericaZonaDecorator(h));
+            americaEng.indiceMasaCorporal(6.3f, 192);
 
         } catch (InvalidHealthDataException e) {
             System.out.println("Error: " + e.getMessage());
