@@ -18,10 +18,10 @@ public class HealthHospitalAdapter implements HealthHospital {
         try {
             double imc = calc.bmi(pesoKg, alturaCm);
             
-            return new float[]{(float) imc};
+            return new float[]{(float) imc, alturaMetros, (float) pesoKg};
         } catch (Exception e) {
             System.out.println("Error en el cálculo: " + e.getMessage());
-            return new float[]{0.0f};
+            return new float[]{0.0f, alturaMetros, (float) pesoKg};
         }
     }
 
