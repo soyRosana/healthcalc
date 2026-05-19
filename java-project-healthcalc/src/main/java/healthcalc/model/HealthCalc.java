@@ -5,7 +5,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
 /**
  * Calculator of some health parameters of persons.
  * 
- * @author ISA
+ * @author ISAGroup06
  *
  */
 public interface HealthCalc {
