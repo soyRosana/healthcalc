@@ -1,1 +1,36 @@
-Apartado 2: Refactoring
+Apartado 2: Refactorings
+
+REFACTORING 1
+
+(1) Problema / Bad smell: 
+Obsesión por los tipos primitivos (Primitive Obsession) y lista de parámetros larga (Long Parameter List). Los métodos actuales usan parámetros sueltos (double weight, char gender, etc.) y Strings/chars directamente, lo cual es frágil.
+
+(2) Refactorings aplicados: 
+- Introduce Parameter Object (para crear la interfaz Person).
+- Replace Type Code with Class/Enum (para crear Gender y BMICategory).
+
+(3) Tipo/categoría del refactoring: 
+Class refactoring.
+
+(4) Breve descripción: 
+Se han creado la interfaz `Person` y los enumerados `Gender` y `BMICategory` para encapsular los datos de los pacientes y tipificar de forma segura las respuestas. Esto prepara el dominio para poder aplicar la segregación de interfaces solicitada en el rediseño.
+
+(5) Cambios manuales: 
+Creación manual de 3 nuevos archivos/clases (Person.java, Gender.java y BMICategory.java). Ningún código existente fue modificado aún.
+
+REFACTORING 2
+
+(1) Problema / Bad smell: 
+"Clases 'Dios' con demasiadas responsabilidades". La interfaz original HealthCalc agrupa cálculos completamente distintos (IMC, peso ideal, circunferencia), violando la cohesión y siendo propensa a cambiar por múltiples razones ("Cambios divergentes").
+
+(2) Refactorings aplicados: 
+- "Extract Class": Se ha extraído la responsabilidad de la interfaz global hacia tres nuevas interfaces segregadas (BasalMetabolicIndex, IdealBodyWeight, OtraMetrica).
+
+(3) Tipo/categoría del refactoring: 
+Class refactoring.
+
+(4) Breve descripción: 
+Se han creado las interfaces segregadas según el diagrama UML para "Mejorar distribución de responsabilidades". De este modo, se elimina la interfaz "Dios", permitiendo que los módulos dependan solo de las métricas que realmente utilizan.
+
+(5) Cambios manuales: 
+Creación manual de 3 nuevos archivos/interfaces (BasalMetabolicIndex.java, IdealBodyWeight.java y OtraMetrica.java). El código existente permanece intacto para mantener compatibilidad en esta iteración.
