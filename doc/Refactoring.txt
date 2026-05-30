@@ -17,7 +17,7 @@ Se han creado la interfaz `Person` y los enumerados `Gender` y `BMICategory` par
 
 (5) Cambios manuales: 
 Creación manual de 3 nuevos archivos/clases (Person.java, Gender.java y BMICategory.java). Ningún código existente fue modificado aún.
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 REFACTORING 2
 
 (1) Problema / Bad smell: 
@@ -34,7 +34,7 @@ Se han creado las interfaces segregadas según el diagrama UML para "Mejorar dis
 
 (5) Cambios manuales: 
 Creación manual de 3 nuevos archivos/interfaces (BasalMetabolicIndex.java, IdealBodyWeight.java y OtraMetrica.java). El código existente permanece intacto para mantener compatibilidad en esta iteración.
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 REFACTORING 3
 
 (1) Problema / Bad smell: 
@@ -51,7 +51,7 @@ Se ha modificado 'HealthCalcImpl' para que implemente las nuevas interfaces mant
 
 (5) Cambios manuales: 
 Modificada 1 clase ('HealthCalcImpl.java'): se alteró la firma de la clase para implementar 3 interfaces nuevas y se añadieron 4 métodos nuevos.
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 REFACTORING 4
 
 (1) Problema / Bad smell: 
@@ -68,3 +68,21 @@ Se actualizó el 'HealthHospitalAdapter' para que dependa de las nuevas interfac
 
 (5) Cambios manuales: 
 Creación manual de 1 clase ('PersonImpl.java'). Modificación de 1 clase existente ('HealthHospitalAdapter.java') para reescribir sus constructores y las llamadas a los métodos.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REFACTORING 5
+
+(1) Problema / Bad smell: 
+"Primitive obsession (uso excesivo de tipos primitivos en vez de objetos)" en el Proxy. Además, la clase actuaba sobre una de las "Clases 'Dios' con demasiadas responsabilidades", acoplando la recolección de estadísticas a una interfaz gigante.
+
+(2) Refactorings aplicados: 
+- "Introduce Parameter Object": Se implementan los métodos de las nuevas interfaces usando el objeto 'Person'. Los nuevos métodos delegan en los antiguos del propio Proxy para asegurar que las estadísticas se guarden y no generar "Código duplicado".
+
+(3) Tipo/categoría del refactoring: 
+Method refactoring.
+
+(4) Breve descripción: 
+Se modificó 'HealthStatsProxy' para implementar las interfaces segregadas. Se utilizaron los objetos en lugar de los primitivos para "Mejorar distribución de responsabilidades", reutilizando la lógica de intercepción ya existente para "Mantener código limpio, modular y fácil de extender".
+
+(5) Cambios manuales: 
+Modificación manual de 1 clase ('HealthStatsProxy.java') para alterar su firma (implementar 3 nuevas interfaces) y añadir 4 métodos nuevos.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
