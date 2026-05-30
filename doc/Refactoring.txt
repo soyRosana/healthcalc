@@ -51,3 +51,20 @@ Se ha modificado 'HealthCalcImpl' para que implemente las nuevas interfaces mant
 
 (5) Cambios manuales: 
 Modificada 1 clase ('HealthCalcImpl.java'): se alteró la firma de la clase para implementar 3 interfaces nuevas y se añadieron 4 métodos nuevos.
+
+REFACTORING 4
+
+(1) Problema / Bad smell: 
+"Primitive obsession (uso excesivo de tipos primitivos en vez de objetos)" en el envío de datos desde el Adapter hacia el modelo. Además, el Adapter dependía de la interfaz original 'HealthCalc', manteniéndose acoplado a una de las "Clases 'Dios' con demasiadas responsabilidades".
+
+(2) Refactorings aplicados: 
+- "Introduce Parameter Object": Se ha creado la clase concreta 'PersonImpl' y se instancia en el Adapter para pasar un único objeto al modelo.
+
+(3) Tipo/categoría del refactoring: 
+Class refactoring / Method refactoring.
+
+(4) Breve descripción: 
+Se actualizó el 'HealthHospitalAdapter' para que dependa de las nuevas interfaces segregadas ('BasalMetabolicIndex' e 'IdealBodyWeight') en lugar de 'HealthCalc'. Se instancian objetos 'PersonImpl' para realizar las llamadas. Esto permite "Minimizar dependencias entre clases" y "Mejorar distribución de responsabilidades".
+
+(5) Cambios manuales: 
+Creación manual de 1 clase ('PersonImpl.java'). Modificación de 1 clase existente ('HealthHospitalAdapter.java') para reescribir sus constructores y las llamadas a los métodos.
