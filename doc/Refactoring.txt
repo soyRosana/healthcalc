@@ -34,3 +34,20 @@ Se han creado las interfaces segregadas según el diagrama UML para "Mejorar dis
 
 (5) Cambios manuales: 
 Creación manual de 3 nuevos archivos/interfaces (BasalMetabolicIndex.java, IdealBodyWeight.java y OtraMetrica.java). El código existente permanece intacto para mantener compatibilidad en esta iteración.
+
+REFACTORING 3
+
+(1) Problema / Bad smell: 
+"Primitive obsession (uso excesivo de tipos primitivos en vez de objetos)" en la implementación principal y riesgo de "Código duplicado" al integrar las nuevas interfaces segregadas.
+
+(2) Refactorings aplicados: 
+- "Introduce Parameter Object": Se implementan los métodos que reciben el objeto 'Person' en `HealthCalcImpl`. Para prevenir el código duplicado, estos nuevos métodos actúan como adaptadores internos que delegan la lógica a los métodos que usan primitivos.
+
+(3) Tipo/categoría del refactoring: 
+Method refactoring.
+
+(4) Breve descripción: 
+Se ha modificado 'HealthCalcImpl' para que implemente las nuevas interfaces manteniendo la antigua. Se han implementado los métodos usando el objeto 'Person' que delegan en los métodos antiguos, logrando "Mantener código limpio, modular y fácil de extender" sin romper las dependencias actuales del Adapter o del Proxy.
+
+(5) Cambios manuales: 
+Modificada 1 clase ('HealthCalcImpl.java'): se alteró la firma de la clase para implementar 3 interfaces nuevas y se añadieron 4 métodos nuevos.
