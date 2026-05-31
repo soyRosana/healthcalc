@@ -5,4 +5,5 @@ public interface Person {
     float height();
     Gender gender();
     int age();
+    float waist();
 }
