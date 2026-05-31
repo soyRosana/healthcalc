@@ -2,7 +2,7 @@ package healthcalc.model;
 
 import healthcalc.exceptions.InvalidHealthDataException;
 
-public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBodyWeight, OtraMetrica {
+public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBodyWeight, WaistCircumference {
     // atributo estático que guarde la instancia única
     private static HealthCalcImpl instance;
 
@@ -141,8 +141,13 @@ public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBod
     }
 
     @Override
-    public float m(Person person) {
-        return 0f; 
+    public String waistCircumference(Person person) {
+        try {
+            char genderChar = (person.gender() == Gender.MALE) ? 'H' : 'M';
+            return this.wcClassification(person.waist(), genderChar);
+        } catch (InvalidHealthDataException e) {
+            return "Error en los datos de perímetro o género";
+        }
     }
     
 }

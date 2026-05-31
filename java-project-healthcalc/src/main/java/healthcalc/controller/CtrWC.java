@@ -6,7 +6,6 @@ import healthcalc.model.WaistCircumference;
 import healthcalc.model.PersonImpl;
 import healthcalc.model.Gender;
 import healthcalc.view.ViewHealthCalc;
-import healthcalc.view.ViewHealthCalc;
 
 public class CtrWC implements ActionListener { 
     private WaistCircumference model;
