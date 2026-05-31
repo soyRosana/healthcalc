@@ -40,7 +40,7 @@ public class CtrIBW implements ActionListener{
             Float altura = Float.parseFloat(alturastr);
             Gender genderEnum = (genero == 'M') ? Gender.FEMALE : Gender.MALE;
 
-            PersonImpl person = new PersonImpl(0f, altura, genderEnum, 0);
+            PersonImpl person = new PersonImpl(0f, altura, genderEnum, 0, 0f);
 
             Float pesoIdeal = model.idealBodyWeight(person);
             String rformat= String.format("%.2f", pesoIdeal);

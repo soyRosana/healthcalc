@@ -21,7 +21,7 @@ Creación manual de 3 nuevos archivos/clases (Person.java, Gender.java y BMICate
 REFACTORING 2
 
 (1) Problema / Bad smell: 
-"Clases 'Dios' con demasiadas responsabilidades". La interfaz original HealthCalc agrupa cálculos completamente distintos (IMC, peso ideal, circunferencia), violando la cohesión y siendo propensa a cambiar por múltiples razones ("Cambios divergentes").
+Clases 'Dios' con demasiadas responsabilidades. La interfaz original HealthCalc agrupa cálculos completamente distintos (IMC, peso ideal, circunferencia), violando la cohesión y siendo propensa a cambiar por múltiples razones ("Cambios divergentes").
 
 (2) Refactorings aplicados: 
 - "Extract Class": Se ha extraído la responsabilidad de la interfaz global hacia tres nuevas interfaces segregadas (BasalMetabolicIndex, IdealBodyWeight, OtraMetrica).
@@ -86,3 +86,18 @@ Se modificó 'HealthStatsProxy' para implementar las interfaces segregadas. Se u
 (5) Cambios manuales: 
 Modificación manual de 1 clase ('HealthStatsProxy.java') para alterar su firma (implementar 3 nuevas interfaces) y añadir 4 métodos nuevos.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+REFACTORING 6
+(1) Problema / Bad smell: 
+"Primitive obsession" y "Feature envy". El cálculo del WC seguía dependiendo de tipos primitivos y de HealthCalc, debido a que la interfaz Person carecía del atributo de la cintura. 
+
+(2) Refactorings aplicados: 
+- "Introduce Parameter Object" (Ampliación): Se añadió el atributo waist a person.
+
+(3) Tipo/categoría del refactoring: 
+Class refactoring/method refactoring.
+
+(4) Breve descripción: 
+Se actualizó la interfaz person con la información del perímetro. La interfaz OtraMetrica ahora procesa el WC. 
+
+(5) Cambios manuales: 
+Modificación de 9 clases. Se amplió Person y PersonImpl con el perímetro. Se adaptó OtraMetrica.java. En HealthCalcImpl y Proxy se borraron los métodos antiguos. Finalmente, se actualizaron los controlers.

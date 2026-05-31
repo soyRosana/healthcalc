@@ -7,7 +7,7 @@ public class PersonImpl implements Person {
     private int age;
     private float waist;
 
-    public PersonImpl(float weight, float height, Gender gender, int age) {
+    public PersonImpl(float weight, float height, Gender gender, int age, float waist) {
         this.weight = weight;
         this.height = height;
         this.gender = gender;

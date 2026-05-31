@@ -24,7 +24,7 @@ public class CtrIMC implements ActionListener {
             try {
                 float peso = Float.parseFloat(view.getPeso());
                 float altura = Float.parseFloat(view.getAltura());
-                PersonImpl person = new PersonImpl(peso, altura, Gender.MALE, 0);
+                PersonImpl person = new PersonImpl(peso, altura, Gender.MALE, 0, 0f);
 
                 float imc = model.basalMetabolicIndex(person);
                 BMICategory category = model.category(person);
