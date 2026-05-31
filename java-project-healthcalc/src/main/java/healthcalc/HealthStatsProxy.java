@@ -7,13 +7,13 @@ import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.model.HealthCalcImpl;
 import healthcalc.model.BasalMetabolicIndex;
 import healthcalc.model.IdealBodyWeight;
-import healthcalc.model.OtraMetrica;
+import healthcalc.model.WaistCircumference;
 import healthcalc.model.Person;
 import healthcalc.model.Gender;
 import healthcalc.model.HealthCalc;
 import healthcalc.model.BMICategory;
 
-public class HealthStatsProxy implements HealthCalc, HealthStats,BasalMetabolicIndex, IdealBodyWeight, OtraMetrica {
+public class HealthStatsProxy implements HealthCalc, HealthStats,BasalMetabolicIndex, IdealBodyWeight, WaistCircumference {
     private HealthCalc calculadora;
     private List<DatosPaciente> listaPacientes;
 
@@ -159,8 +159,7 @@ public class HealthStatsProxy implements HealthCalc, HealthStats,BasalMetabolicI
 
 
     @Override
-    //implementacion generica para WC para cumplir con UML
-    public float m(Person person) {
-        return 0f;
+    public String waistCircumference(Person person) {
+        return ((HealthCalcImpl) calculadora).waistCircumference(person);
     }
 }

@@ -2,7 +2,7 @@ package healthcalc.model;
 
 import healthcalc.exceptions.InvalidHealthDataException;
 
-public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBodyWeight, OtraMetrica {
+public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBodyWeight, WaistCircumference {
     // atributo estático que guarde la instancia única
     private static HealthCalcImpl instance;
 
@@ -108,7 +108,6 @@ public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBod
     @Override
     public float basalMetabolicIndex(Person person) {
         try {
-            // Delegamos en el método legacy para no tener "Código duplicado"
             return (float) this.bmi(person.weight(), person.height());
         } catch (InvalidHealthDataException e) {
             return 0f;
@@ -119,20 +118,12 @@ public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBod
     public BMICategory category(Person person) {
         try {
             float bmiValue = basalMetabolicIndex(person);
-            String result = this.bmiClassification(bmiValue);
-            
-            
-            switch(result) {
-                case "Delgadez Severa": return BMICategory.SEVERE_THINNESS;
-                case "Delgadez Moderada": return BMICategory.MODERATE_THINNESS;
-                case "Delgadez Leve": return BMICategory.MILD_THINNESS;
-                case "Normal": return BMICategory.NORMAL;
-                case "Sobrepeso": return BMICategory.OVERWEIGHT;
-                case "Obesidad I": return BMICategory.OBESE_CLASS_I;
-                case "Obesidad II": return BMICategory.OBESE_CLASS_II;
-                case "Obesidad III": return BMICategory.OBESE_CLASS_III;
-                default: return BMICategory.NORMAL;
+            for (BMICategory category : BMICategory.values()) {
+                if (bmiValue >= category.getIni() && bmiValue < category.getFin()) {
+                    return category;
+                }
             }
+            return BMICategory.NORMAL;
         } catch (InvalidHealthDataException e) {
             return BMICategory.NORMAL;
         }
@@ -150,8 +141,13 @@ public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBod
     }
 
     @Override
-    public float m(Person person) {
-        return 0f; 
+    public String waistCircumference(Person person) {
+        try {
+            char genderChar = (person.gender() == Gender.MALE) ? 'H' : 'M';
+            return this.wcClassification(person.waist(), genderChar);
+        } catch (InvalidHealthDataException e) {
+            return "Error en los datos de perímetro o género";
+        }
     }
     
 }

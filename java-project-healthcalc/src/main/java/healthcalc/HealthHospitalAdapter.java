@@ -22,7 +22,7 @@ public class HealthHospitalAdapter implements HealthHospital {
         float alturaCm = alturaMetros * 100.0f;
         float pesoKg = (float) pesoGramos / 1000.0f;
 
-        PersonImpl person = new PersonImpl(pesoKg, alturaCm, Gender.MALE, 0);
+        PersonImpl person = new PersonImpl(pesoKg, alturaCm, Gender.MALE, 0, 0f);
 
         try {
             float imc = bmiCalc.basalMetabolicIndex(person);
@@ -39,7 +39,7 @@ public class HealthHospitalAdapter implements HealthHospital {
         float alturaCm = alturaMetros * 100.0f;
         Gender genderEnum = (genero == 'M') ? Gender.FEMALE : Gender.MALE;
 
-        PersonImpl person = new PersonImpl(0f, alturaCm, genderEnum, 0);
+        PersonImpl person = new PersonImpl(0f, alturaCm, genderEnum, 0, 0f);
 
         try {
             float ibw = ibwCalc.idealBodyWeight(person);
