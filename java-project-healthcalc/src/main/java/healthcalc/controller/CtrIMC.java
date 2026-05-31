@@ -3,14 +3,17 @@ package healthcalc.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import healthcalc.model.HealthCalc;
+import healthcalc.model.BasalMetabolicIndex;
+import healthcalc.model.PersonImpl;
+import healthcalc.model.Gender;
+import healthcalc.model.BMICategory;
 import healthcalc.view.ViewHealthCalc;
 
 public class CtrIMC implements ActionListener { 
-    private HealthCalc model;
+    private BasalMetabolicIndex model;
     private ViewHealthCalc view;
 
-    public CtrIMC(HealthCalc model, ViewHealthCalc view) {
+    public CtrIMC(BasalMetabolicIndex model, ViewHealthCalc view) {
         this.model = model;
         this.view = view;
     }
@@ -19,12 +22,16 @@ public class CtrIMC implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         if (event.getActionCommand().equalsIgnoreCase("CALCULAR_IMC")) {
             try {
-                double peso = Double.parseDouble(view.getPeso());
-                double altura = Double.parseDouble(view.getAltura());
-                double imc = model.bmi(peso, altura);
+                float peso = Float.parseFloat(view.getPeso());
+                float altura = Float.parseFloat(view.getAltura());
+                PersonImpl person = new PersonImpl(peso, altura, Gender.MALE, 0);
+
+                float imc = model.basalMetabolicIndex(person);
+                BMICategory category = model.category(person);
+                String interpretacion = category.getStrcat();
                 
                 view.setResultado(String.format("%.2f", imc));
-                view.setInterpretacion(model.bmiClassification(imc));
+                view.setInterpretacion(interpretacion);
                 view.setMessage(""); 
             } catch (NumberFormatException e) {
                 view.setMessage("Error en IMC: Datos no numéricos.");
