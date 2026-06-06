@@ -1,16 +1,18 @@
 package healthcalc.controller;
 
-import healthcalc.model.HealthCalc;
+import healthcalc.model.IdealBodyWeight;
+import healthcalc.model.PersonImpl;
+import healthcalc.model.Gender;
 import healthcalc.view.ViewHealthCalc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
 public class CtrIBW implements ActionListener{
-    private HealthCalc model;
+    private IdealBodyWeight model;
     private ViewHealthCalc view;
     
-    public CtrIBW(HealthCalc model, ViewHealthCalc view) {
+    public CtrIBW(IdealBodyWeight model, ViewHealthCalc view) {
         this.model = model;
         this.view = view;
     }
@@ -35,18 +37,16 @@ public class CtrIBW implements ActionListener{
                 return;
             }
             char genero=generostr.charAt(0);
-            double altura = Double.parseDouble(alturastr);
+            Float altura = Float.parseFloat(alturastr);
+            Gender genderEnum = (genero == 'M') ? Gender.FEMALE : Gender.MALE;
 
-            double pesoIdeal = model.idealBodyWeight(altura, genero);
+            PersonImpl person = new PersonImpl(0f, altura, genderEnum, 0, 0f);
+
+            Float pesoIdeal = model.idealBodyWeight(person);
             String rformat= String.format("%.2f", pesoIdeal);
             view.setResultadoIBW(String.valueOf(rformat)); 
             
-            String gen = "";
-            if (genero == 'H') {
-                gen= "un hombre";
-             }
-            else{gen="una mujer"; }
-
+            String gen = (genero == 'H') ? "un hombre" : "una mujer";
 
             String interpretacion = "El peso ideal de " + gen + " que mide " + alturastr + " cm sería " + rformat + " kg.";
         

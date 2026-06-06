@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import healthcalc.exceptions.InvalidHealthDataException;
-import healthcalc.model.HealthCalc;
 import healthcalc.model.HealthCalcImpl;
+import healthcalc.model.BasalMetabolicIndex;
+import healthcalc.model.IdealBodyWeight;
+import healthcalc.model.WaistCircumference;
+import healthcalc.model.Person;
+import healthcalc.model.Gender;
+import healthcalc.model.HealthCalc;
+import healthcalc.model.BMICategory;
 
-public class HealthStatsProxy implements HealthCalc, HealthStats {
+public class HealthStatsProxy implements HealthCalc, HealthStats,BasalMetabolicIndex, IdealBodyWeight, WaistCircumference {
     private HealthCalc calculadora;
     private List<DatosPaciente> listaPacientes;
 
@@ -103,5 +109,57 @@ public class HealthStatsProxy implements HealthCalc, HealthStats {
     @Override
     public int numTotalPacientes() {
         return listaPacientes.size();
+    }
+
+
+    @Override
+    public float basalMetabolicIndex(Person person) {
+        try {
+            //this.bmi para que se registre en listaPacientes
+            
+            return (float) this.bmi(person.weight(), person.height());
+        } catch (InvalidHealthDataException e) {
+            return 0f;
+        }
+    }
+
+    @Override
+    public BMICategory category(Person person) {
+        try {
+            float bmiValue = basalMetabolicIndex(person);
+            String result = this.bmiClassification(bmiValue);
+            
+            switch(result) {
+                case "Delgadez Severa": return BMICategory.SEVERE_THINNESS;
+                case "Delgadez Moderada": return BMICategory.MODERATE_THINNESS;
+                case "Delgadez Leve": return BMICategory.MILD_THINNESS;
+                case "Normal": return BMICategory.NORMAL;
+                case "Sobrepeso": return BMICategory.OVERWEIGHT;
+                case "Obesidad I": return BMICategory.OBESE_CLASS_I;
+                case "Obesidad II": return BMICategory.OBESE_CLASS_II;
+                case "Obesidad III": return BMICategory.OBESE_CLASS_III;
+                default: return BMICategory.NORMAL;
+            }
+        } catch (InvalidHealthDataException e) {
+            return BMICategory.NORMAL;
+        }
+    }
+
+    @Override
+    public float idealBodyWeight( Person person) {
+        try {
+            char genderChar = (person.gender() == Gender.MALE) ? 'H' : 'M';
+
+            //this.idealBodyWeight para que se registre en listaPacientes
+            return (float) this.idealBodyWeight(person.height(), genderChar);
+        } catch (InvalidHealthDataException e) {
+            return 0f;
+        }
+    }
+
+
+    @Override
+    public String waistCircumference(Person person) {
+        return ((HealthCalcImpl) calculadora).waistCircumference(person);
     }
 }

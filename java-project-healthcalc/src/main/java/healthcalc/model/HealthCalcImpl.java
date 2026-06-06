@@ -2,7 +2,7 @@ package healthcalc.model;
 
 import healthcalc.exceptions.InvalidHealthDataException;
 
-public class HealthCalcImpl implements HealthCalc {
+public class HealthCalcImpl implements HealthCalc, BasalMetabolicIndex, IdealBodyWeight, WaistCircumference {
     // atributo estático que guarde la instancia única
     private static HealthCalcImpl instance;
 
@@ -102,6 +102,51 @@ public class HealthCalcImpl implements HealthCalc {
             if (waistCircumference >= 88) return "Riesgo Muy Elevado";
             if (waistCircumference >= 80) return "Riesgo Elevado";
             return "Riesgo Bajo";
+        }
+    }
+
+    @Override
+    public float basalMetabolicIndex(Person person) {
+        try {
+            return (float) this.bmi(person.weight(), person.height());
+        } catch (InvalidHealthDataException e) {
+            return 0f;
+        }
+    }
+
+    @Override
+    public BMICategory category(Person person) {
+        try {
+            float bmiValue = basalMetabolicIndex(person);
+            for (BMICategory category : BMICategory.values()) {
+                if (bmiValue >= category.getIni() && bmiValue < category.getFin()) {
+                    return category;
+                }
+            }
+            return BMICategory.NORMAL;
+        } catch (InvalidHealthDataException e) {
+            return BMICategory.NORMAL;
+        }
+    }
+
+    @Override
+    public float idealBodyWeight(Person person) {
+        try {
+            
+            char genderChar = (person.gender() == Gender.MALE) ? 'H' : 'M';
+            return (float) this.idealBodyWeight(person.height(), genderChar);
+        } catch (InvalidHealthDataException e) {
+            return 0f;
+        }
+    }
+
+    @Override
+    public String waistCircumference(Person person) {
+        try {
+            char genderChar = (person.gender() == Gender.MALE) ? 'H' : 'M';
+            return this.wcClassification(person.waist(), genderChar);
+        } catch (InvalidHealthDataException e) {
+            return "Error en los datos de perímetro o género";
         }
     }
     

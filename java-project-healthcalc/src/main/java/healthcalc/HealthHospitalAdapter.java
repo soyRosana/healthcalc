@@ -1,22 +1,31 @@
 package healthcalc;
 
-import healthcalc.model.HealthCalc;
 import healthcalc.model.HealthCalcImpl;
+import healthcalc.model.BasalMetabolicIndex;
+import healthcalc.model.IdealBodyWeight;
+import healthcalc.model.PersonImpl;
+import healthcalc.model.Gender;
+
 
 public class HealthHospitalAdapter implements HealthHospital {
-    private HealthCalc calc;
+    private BasalMetabolicIndex bmiCalc;
+    private IdealBodyWeight ibwCalc;
 
     public HealthHospitalAdapter() {
-        this.calc = HealthCalcImpl.getInstance();
+        HealthCalcImpl instance = HealthCalcImpl.getInstance();
+        this.bmiCalc = instance;
+        this.ibwCalc = instance;
     }
 
     @Override
     public float[] indiceMasaCorporal(float alturaMetros, int pesoGramos) {
-        double alturaCm = alturaMetros * 100.0;
-        double pesoKg = (double) pesoGramos / 1000.0;
+        float alturaCm = alturaMetros * 100.0f;
+        float pesoKg = (float) pesoGramos / 1000.0f;
+
+        PersonImpl person = new PersonImpl(pesoKg, alturaCm, Gender.MALE, 0, 0f);
 
         try {
-            double imc = calc.bmi(pesoKg, alturaCm);
+            float imc = bmiCalc.basalMetabolicIndex(person);
             
             return new float[]{(float) imc, alturaMetros, (float) pesoKg};
         } catch (Exception e) {
@@ -27,11 +36,14 @@ public class HealthHospitalAdapter implements HealthHospital {
 
     @Override
     public int pesoCorporalIdeal(char genero, float alturaMetros) {
-        double alturaCm = alturaMetros * 100.0;
-        
+        float alturaCm = alturaMetros * 100.0f;
+        Gender genderEnum = (genero == 'M') ? Gender.FEMALE : Gender.MALE;
+
+        PersonImpl person = new PersonImpl(0f, alturaCm, genderEnum, 0, 0f);
+
         try {
-            double ibw = calc.idealBodyWeight(alturaCm, genero);
-            return (int) Math.round(ibw);
+            float ibw = ibwCalc.idealBodyWeight(person);
+            return Math.round(ibw);
         } catch (Exception e) {
             return 0;
         }

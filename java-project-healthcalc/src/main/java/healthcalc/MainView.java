@@ -8,7 +8,7 @@ import healthcalc.controller.*;
 public class MainView {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            HealthCalc model = HealthCalcImpl.getInstance();
+            HealthCalcImpl model = HealthCalcImpl.getInstance();
             HealthCalcView view = new HealthCalcView();
             
             CtrIMC controllerIMC = new CtrIMC(model, view);

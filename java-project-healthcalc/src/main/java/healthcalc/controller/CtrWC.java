@@ -2,14 +2,16 @@ package healthcalc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import healthcalc.model.HealthCalc;
+import healthcalc.model.WaistCircumference;
+import healthcalc.model.PersonImpl;
+import healthcalc.model.Gender;
 import healthcalc.view.ViewHealthCalc;
 
 public class CtrWC implements ActionListener { 
-    private HealthCalc model;
+    private WaistCircumference model;
     private ViewHealthCalc view;
 
-    public CtrWC(HealthCalc model, ViewHealthCalc view) {
+    public CtrWC(WaistCircumference model, ViewHealthCalc view) {
         this.model = model;
         this.view = view;
     }
@@ -19,17 +21,17 @@ public class CtrWC implements ActionListener {
         if (event.getActionCommand().equalsIgnoreCase("CALCULAR_WC")) {
             try {
                 // obtenemos los datos del PanelWC
-                double cintura = Double.parseDouble(view.getCintura());
+                Float cintura = Float.parseFloat(view.getCintura());
                 String generostr = view.getGenero().toUpperCase().trim();
                 if (generostr.isEmpty()) {
                     view.setInterpretacion("Error: Introduce Género (H/M).");
                     return;
                 }
                 
-                char genero = generostr.charAt(0);
+                Gender genderEnum = (generostr.charAt(0) == 'M') ? Gender.FEMALE : Gender.MALE;
+                PersonImpl p = new PersonImpl(0f, 0f, genderEnum, 0, cintura);
 
-                // usando de la practica 1 wcClassification
-                String interpretacion = model.wcClassification(cintura, genero);
+                String interpretacion = model.waistCircumference(p);
                 
                 view.setResultadoWC(cintura + " cm");
                 view.setInterpretacionWC(interpretacion);
