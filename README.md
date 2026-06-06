@@ -3,7 +3,7 @@ Bienvenido al proyecto de la asignatura de **Ingeniería del Software Avanzada**
 
 El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hospital/virgen-victoria/) de Málaga nos ha encargado el desarrollo de una **Calculadora de Salud** (**_HealthCalc_**) que permita calcular diferentes métricas de los pacientes.
 
-![Modelo de características de la calculadora de salud.](resources/p1/healthcalc_fm.png)
+![Modelo de características de la calculadora de salud.](resources/images/healthcalc_fm.png)
 
 ## Requisitos  
 
