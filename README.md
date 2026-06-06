@@ -338,6 +338,7 @@ Para cada categoría y género, probamos valores que están justo en el límite 
 - Ejecutar la aplicación: Clic en Run usando el IDE.
 - Ejecutar los tests: Clic en Run Tests usando el IDE o con Maven: `mvn test`
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
+</details>
 
 </details>
 
@@ -354,3 +355,55 @@ Diagrama de casos de uso de las funcionalidades de HealthCalc
 * [Especificación: Cálculo del Índice de masa corporal (IMC) (CU-01)](doc/especification_imc.txt)
 * [Especificación: Cálculo del Perímetro Abdominal (WC) (CU-02)](doc/especification_wc.txt)
 * [Especificación: Peso Corporal Ideal - Lorentz (CU-03)](doc/especificacion_ibw.txt)
+
+## Behaviour Driven Development (BDD)
+
+En esta sección se detallan las historias de usuario y los escenarios de prueba implementadas para la calculadora de salud, utilizando Gherkin para definir los comportamientos esperados.
+
+<details>
+<summary><b>Índice de Masa Corporal (BMI)</b></summary>
+  
+* **Historia de Usuario:** Como usuario de la calculadora de la salud, quiero calcular el BMI para obtener mi indicador de estado nutricional.
+* **Escenarios:**
+    * Cálculo exitoso del valor de BMI 
+    * Cálculo del BMI en límites biológicos permitidos
+    * Intento de cálculo del BMI con datos biológicamente imposibles
+
+* **Enlace al fichero:** [BMI.feature](./java-project-healthcalc/src/test/resources/features/BMI.feature)
+</details>   
+
+<details>
+<summary><b>Clasificación completa del Índice de Masa Corporal (Full BMI)</b></summary>
+  
+* **Historia de Usuario:** Como usuario de la calculadora de la salud, quiero obtener mi categoría de peso para conocer mi estado nutricional.
+* **Escenarios:**
+    * Categorización exitosa en todos los rangos
+    * Verificación de los límites de las categorías
+    * Intento de clasificación con valores para BMI fuera de rango biológico (0,150)
+
+* **Enlace al fichero:** [fullBMI.feature](./java-project-healthcalc/src/test/resources/features/fullBMI.feature)
+</details>  
+<details>
+<summary><b>Perímetro Abdominal (WC)</b></summary>
+  
+* **Historia de Usuario:** Como usuario de la calculadora de la salud, quiero clasificar el perímetro abdominal para obtener información sobre mi riesgo cardiovascular.
+* **Escenarios:**
+    * Verificación de clasificaciones exitosas 
+    * Perímetro en el límite inferior para hombres
+    * Perímetro en el límite inferior para mujeres
+    * Intento de clasificación con datos biológicamente imposibles
+
+* **Enlace al fichero:** [WC.feature](./java-project-healthcalc/src/test/resources/features/WC.feature)
+</details>    
+<details>
+<summary><b>Peso Corporal Ideal (IBW)</b></summary>
+  
+* **Historia de Usuario:** Como usuario de la calculadora de la salud, quiero calcular mi peso ideal según mi altura y género.
+* **Escenarios:**
+    * Cálculo exitoso del peso ideal para hombres y mujeres
+    * Cálculo del IBW en límites biológicos permitidos
+    * Cálculo con altura fuera de rango
+    * Cálculo con género inválido
+
+* **Enlace al fichero:** [IBW.feature](./java-project-healthcalc/src/test/resources/features/IBW.feature)
+</details>  

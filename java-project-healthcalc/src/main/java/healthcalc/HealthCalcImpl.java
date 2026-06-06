@@ -12,21 +12,16 @@ public class HealthCalcImpl implements HealthCalc {
         if (bmi > 150) {
             throw new InvalidHealthDataException("BMI must be within a possible biological range [0-150].");
         }
-        String result = "Obesity";
-        // if (bmi < 18.5) {
-        //     result = "Underweight";
-        // } else if (bmi >= 18.5 && bmi < 25) {
-        //     result = "Normal weight";
-        // } else if (bmi >= 25 && bmi < 30) {
-        //     result = "Overweight";
-        // }
-        if (bmi < 18.5) {
-            result = "Underweight";
-        } else if (bmi < 25) {
-            result = "Normal weight";
-        } else if (bmi < 30) {
-            result = "Overweight";
-        }
+        String result;
+        if (bmi < 16) result= "Delgadez Severa";
+        else if (bmi < 17) result="Delgadez Moderada";
+        else if (bmi < 18.5) result="Delgadez Leve";
+        else if (bmi < 25) result="Normal";
+        else if (bmi < 30) result="Sobrepeso";
+        else if (bmi < 35) result="Obesidad I";
+        else if (bmi < 40) result="Obesidad II";
+        else result = "Obesidad III";
+
         return result;
     }
 
@@ -41,10 +36,11 @@ public class HealthCalcImpl implements HealthCalc {
         if (weight < 1 || weight > 700) {
             throw new InvalidHealthDataException("Weight must be within a possible biological range [1-700] kg.");
         }
-        if (height < 0.30 || height > 3.00) {
-            throw new InvalidHealthDataException("Height must be within a possible biological range [0.30-3.00] m.");
+        if (height < 30 || height > 300) {
+            throw new InvalidHealthDataException("Height must be within a possible biological range [30-300] cm.");
         }
-        return weight / Math.pow(height, 2);
+        double heightmeters=height/100;
+        return weight / Math.pow(heightmeters, 2);
     }
 
     @Override
