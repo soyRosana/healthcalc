@@ -433,3 +433,51 @@ En esta sección se detallan las historias de usuario y los escenarios de prueba
 ![Captura de la interfaz (4)](doc/GUI/4.PanelWC.png)
 </details> 
 
+--
+## Patrones de Diseño
+
+<details>
+<summary><b>Patrón Singular (Singleton)</b></summary>
+
+Se ha aplicado el patrón Singleton a la clase 'HealthCalcImpl'. Esto garantiza que solo exista una única instancia de la calculadora en toda la aplicación, centralizando la lógica y optimizando el uso de recursos.
+
+![Captura del patrón (1)](design_patterns/PatronSingularUML.png)
+
+</details> 
+
+<details>
+<summary><b>Patrón Adaptador (Adapter) - Punto 3.a</b></summary>
+
+Se ha implementado el patrón Adapter para permitir la integración de nuestra calculadora con el sistema del Hospital Costa del Sol. 
+
+* **Funcionalidad:** El adaptador traduce las unidades de medida del hospital (metros y gramos) a las unidades internas de la calculadora (centímetros y kilogramos).
+* **Interoperabilidad:** Permite que la calculadora sea utilizada por sistemas externos con interfaces diferentes sin modificar el código original.
+
+![Captura del patrón (2)](design_patterns/3a_adapter.png)
+
+</details>
+
+<details>
+<summary><b>Patrón Proxy (Estadísticas) - Punto 3.b</b></summary>
+
+Se ha implementado un Proxy para interceptar las llamadas a la calculadora y generar estadísticas de uso de forma transparente.
+
+* **Funcionalidad:** Registra los datos de cada cálculo (peso, altura, IMC) de forma anónima en una lista interna.
+* **Estadísticas:** A través de la interfaz `HealthStats`, permite obtener medias de los valores y conteos por género.
+* **Ventaja:** Añade funcionalidades de registro y análisis sin alterar el código base de la calculadora original.
+
+![Captura del patrón (3)](design_patterns/3b_proxy.png)
+
+</details>
+<details>
+<summary><b>Patrón Decorador (Decorator) - Punto 3.c</b></summary>
+
+Se ha implementado el patrón Decorator para añadir soporte a diferentes sistemas métricos y generar mensajes personalizados en diferentes idiomas de forma dinámica.
+
+* **Funcionalidad (Zonas):** Adapta las entradas de la calculadora según la región, permitiendo utilizar el sistema americano (pies y libras) o el sistema métrico (metros y gramos).
+* **Funcionalidad (Idiomas):** Permite mprimir automáticamente por consola el resultado del cálculo del IMC en español e inglés.
+* **Ventaja:** Se pueden encadenar los decoradores, es decir, es posible crear múltiples combinaciones sin necesidad de modificar el código base del adaptador ni crear una jerarquía de clases compleja.
+
+![Captura del patrón (4)](design_patterns/3c_decorator.png)
+
+</details>

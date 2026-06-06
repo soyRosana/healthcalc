@@ -24,7 +24,7 @@ public class HealthSteps {
 
     @Given("la calculadora de salud está iniciada")
     public void la_calculadora_de_salud_está_iniciada() {
-        healthCalc = new HealthCalcImpl();
+        healthCalc =  HealthCalcImpl.getInstance();
         exceptionThrown = false;
     }
 
