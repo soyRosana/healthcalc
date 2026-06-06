@@ -1,0 +1,38 @@
+Especificación Peso Corporal Ideal (IBW) - Lorentz
+- Identificación y contexto
+ID: CU-03
+Nombre del Caso de Uso: Calcular Peso Corporal Ideal (IBW)
+Descripción: El sistema calcula el peso teórico saludable de un individuo basándose en su altura y género biológico utilizando la fórmula de Lorentz.
+Actor Principal: Usuario
+Ámbito (Scope): Marco lógico donde se ejecutan las operaciones de la herramienta de cálculo HealthCalc
+Nivel (Level): Objetivo de Usuario
+
+- Interesados
+Usuario: Quiere saber el peso ideal para su salud.
+Hospital: Quiere un cálculo preciso que esté basado en fórmulas validadas (Lorentz).
+--Disparador: Usuario solicita su resultado tras introducir los datos.
+
+- Condiciones y Garantías
+--Precondiciones: 
+El sistema debe tener registrada la fórmula de Lorentz, para su cálculo, de ambos géneros.
+El usuario debe saber e introducir su estatura en cm.
+La aplicación está en un estado funcional.
+--Garantía de Éxito (Success Guarantee): 
+El usuario obtiene un resultado exacto y válido sobre su peso óptimo.
+El sistema queda disponible para hacer otra consulta con la calculadora.
+--Garantía Mínima (Minimal Guarantee):
+El sistema informa de un error si el cálculo falla (si los datos son inválidos o la fórmula está mal), no da un resultado inválido y lleva a la página de inicio.
+
+- Flujos de eventos
+Escenario Principal de Éxito (Main Success Scenario):
+1.Usuario introduce sus datos (Género y Altura en cm).
+2.Sistema valida que los datos sean válidos.
+3.Sistema calcula con la formula de Lorentz, según el género indicado.
+PCI= (altura(cm)-100)-(altura(cm)-150/K), siendo k=4 para hombres y k=2 para mujeres.
+4.Sistema muestra resultado del peso ideal por pantalla.
+
+-Extensiones (Flujos Alternativos):
+2a. Altura fuera de rango (30cm-300cm), mostraría un mensaje de error el sistema y el sistema permite su corrección.
+2b. Datos introducidos no son números, error de formato incorrecto y el sistema permite su corrección.
+2c. Género no ha sido seleccionado, sistema muestra error y el sistema permite su corrección.
+4a. El sistema tiene un fallo en el motor de cálculo y vuelve al estado inicial, la garantía mínima, para evitar resultado inválido.

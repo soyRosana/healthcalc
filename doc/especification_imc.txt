@@ -1,0 +1,49 @@
+Caso de Uso: Calcular Índice de Masa Corporal (IMC / BMI)
+
+ID: CU-01
+Actor Principal: Usuario (Personal sanitario).
+Ámbito: Marco lógico donde se ejecutan las operaciones de la herramienta de cálculo HealthCalc.
+Nivel: Objetivo de usuario.
+
+Descripción
+El profesional sanitario introduce el peso y la altura de un paciente para obtener su Índice de Masa Corporal. El sistema debe validar que los datos sean biológicamente coherentes, realizar el cálculo matemático y clasificar el resultado final según los estándares de la OMS.
+
+Interesados
+- Personal Sanitario: Requiere un cálculo rápido y automatizado que evite errores manuales.
+- Hospital El Clínico: Quiere un cálculo preciso que esté basado en fórmulas validadas y que sus datos registrados sigan los estándares de la OMS.
+
+Precondiciones
+- El usuario tiene acceso al módulo de cálculo de la aplicación HealthCalc.
+- El sistema debe tener registrada la fórmula de cálculo y los umbrales clasificatorios para procesar el resultado de la misma.
+Disparador: El usuario accede a la calculadora y selecciona la métrica IMC.
+
+Garantías
+- Garantía de Éxito: El IMC se calcula, se muestra su clasificación (OMS) y no se permiten datos fuera de rango.
+- Garantía Mínima: En caso de error en los datos de entrada, el sistema lanza una InvalidHealthDataException, no da un resultado inválido y lleva a la página de inicio.
+
+Escenario Principal de Éxito
+
+1. El usuario introduce el Peso (en kg) y la Altura (en cm).
+
+2. El sistema valida que el peso esté en el rango.
+
+3. El sistema valida que la altura esté en el rango.
+
+4. El sistema calcula el valor del IMC mediante la fórmula: IMC = peso / (altura/100)^2.
+
+5. El sistema verifica que el IMC resultante esté en el rango biológico posible.
+
+6. El sistema asigna la clasificación de la OMS (Bajo peso, Normal, Sobrepeso u Obesidad).
+
+7. El sistema devuelve y muestra el resultado al usuario.
+
+Extensiones
+2a. Peso fuera de rango: Si el peso es < 1 o > 700, el sistema lanza InvalidHealthDataException.
+3a. Altura fuera de rango: Si la altura es < 30 o > 300, el sistema lanza InvalidHealthDataException.
+4a. Valores negativos o cero: El sistema rechaza cualquier entrada <= 0 lanzando InvalidHealthDataException.
+5a. IMC resultante excesivo: Si el cálculo final es > 150, el sistema lanza la excepción.
+6a. El sistema clasifica el resultado según los siguientes umbrales:
+	- IMC < 18.5: "Underweight"
+	- 18.5 <= IMC < 25: "Normal weight"
+	- 25 <= IMC < 30: "Overweight"
+	- IMC >= 30: "Obesity" (Incluye Grados I, II y III).

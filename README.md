@@ -3,7 +3,7 @@ Bienvenido al proyecto de la asignatura de **Ingeniería del Software Avanzada**
 
 El [Hospital Universitario Virgen de la Victoria (El Clínico)](https://www.sspa.juntadeandalucia.es/servicioandaluzdesalud/hospital/virgen-victoria/) de Málaga nos ha encargado el desarrollo de una **Calculadora de Salud** (**_HealthCalc_**) que permita calcular diferentes métricas de los pacientes.
 
-![MOdelo de características de la calculadora de salud.](resources/images/healthcalc_fm.png)
+![Modelo de características de la calculadora de salud.](resources/images/healthcalc_fm.png)
 
 ## Requisitos  
 
@@ -340,3 +340,17 @@ Para cada categoría y género, probamos valores que están justo en el límite 
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
 
 </details>
+
+
+## Especificaciones
+
+### Casos de uso
+Diagrama de casos de uso de las funcionalidades de HealthCalc
+
+![Diagrama de Casos de Uso](doc/diagrama_casos_uso.png)
+
+<summary><b>Documentación</b></summary>
+  
+* [Especificación: Cálculo del Índice de masa corporal (IMC) (CU-01)](doc/especification_imc.txt)
+* [Especificación: Cálculo del Perímetro Abdominal (WC) (CU-02)](doc/especification_wc.txt)
+* [Especificación: Peso Corporal Ideal - Lorentz (CU-03)](doc/especificacion_ibw.txt)

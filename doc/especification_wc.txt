@@ -1,0 +1,45 @@
+Caso de Uso: Medición del Perímetro Abdominal (WC - Waist Circumference)
+
+ID: CU-02
+Actor Principal: Usuario (Personal sanitario).
+Ámbito: Marco lógico donde se ejecutan las operaciones de la herramienta de cálculo HealthCalc.
+Nivel: Objetivo de usuario.
+
+Descripción
+El profesional sanitario introduce el perímetro de cintura y el género del paciente. El sistema valida la integridad biológica de los datos, verifica que el identificador de género sea correcto ('H' o 'M') y determina el nivel de riesgo cardiovascular basándose en umbrales específicos por sexo.
+
+Interesados
+- Personal Sanitario: Necesita una clasificación inmediata del riesgo cardiovascular sin necesidad de memorizar tablas de umbrales por género.
+- Hospital El Clínico: Requiere que el sistema bloquee datos erróneos (como géneros no codificados o medidas físicamente imposibles) para mantener la calidad de la base de datos.
+
+Precondiciones
+- El usuario tiene acceso al módulo de cálculo de la aplicación HealthCalc.
+- El sistema implementa la lógica de clasificación diferenciada por géneros.
+
+Disparador: El usuario accede a la calculadora y selecciona la métrica Perímetro Abdominal (WC).
+
+Garantías
+- Garantía de Éxito: El sistema devuelve la cadena exacta de riesgo ("Riesgo Bajo", "Riesgo Elevado" o "Riesgo Muy Elevado") y procesa la entrada solo si cumple los rangos.
+- Garantía Mínima: Si los datos no cumplen los requisitos establecidos, el sistema lanza InvalidHealthDataException junto a un mensaje de error y no realiza el cálculo.
+
+Escenario Principal de Éxito
+1. El usuario introduce el Perímetro de Cintura (en cm) y el Género (carácter 'H' o 'M').
+2. El sistema valida que el perímetro esté en el rango permitido [30, 250].
+3. El sistema valida que el género introducido sea un carácter válido ('H' o 'M').
+4. El sistema evalúa el riesgo comparando la medida con los umbrales del género correspondiente.
+5. El sistema devuelve y muestra la clasificación resultante al usuario.
+
+Extensiones
+2a. Perímetro fuera de rango:
+    Si waistCircumference < 30 o > 250, el sistema lanza InvalidHealthDataException: "Waist circumference must be within [30-250] cm."
+3a. Género no reconocido:
+    Si el género es distinto de 'H' o 'M', el sistema lanza InvalidHealthDataException: "Gender must be 'H' (Men) or 'M' (Women)."
+4a. Lógica de clasificación (Umbrales):
+    - Si Género es 'H' (Hombre):
+        * Perímetro >= 102 cm: "Riesgo Muy Elevado"
+        * 94 cm <= Perímetro < 102 cm: "Riesgo Elevado"
+        * Perímetro < 94 cm: "Riesgo Bajo"
+    - Si Género es 'M' (Mujer):
+        * Perímetro >= 88 cm: "Riesgo Muy Elevado"
+        * 80 cm <= Perímetro < 88 cm: "Riesgo Elevado"
+        * Perímetro < 80 cm: "Riesgo Bajo"
