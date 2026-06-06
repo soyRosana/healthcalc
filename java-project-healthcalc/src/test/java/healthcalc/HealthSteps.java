@@ -3,6 +3,8 @@ package healthcalc;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import healthcalc.model.HealthCalc;
+import healthcalc.model.HealthCalcImpl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

@@ -12,6 +12,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import healthcalc.exceptions.InvalidHealthDataException;
+import healthcalc.model.HealthCalc;
+import healthcalc.model.HealthCalcImpl;
 
 /**
  * Tests for the HealthCalc interface regarding Waist Circumference (WC).

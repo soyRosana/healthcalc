@@ -1,4 +1,4 @@
-package healthcalc;
+package healthcalc.model;
 
 import healthcalc.exceptions.InvalidHealthDataException;
 

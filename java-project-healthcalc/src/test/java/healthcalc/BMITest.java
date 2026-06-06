@@ -11,6 +11,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import healthcalc.exceptions.InvalidHealthDataException;
+import healthcalc.model.HealthCalc;
+import healthcalc.model.HealthCalcImpl;
 
 @DisplayName("Tests para la calculadora de salud (Español/CM).")
 public class BMITest {
